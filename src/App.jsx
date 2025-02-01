@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './App.css';
-import dashboard from './components/dashboard.jsx'; // Make sure the import matches the component name
+import Dashboard from './components/Dashboard';  // Make sure the import matches the component name
 
 function App() {
   const [count, setCount] = useState(0);
@@ -9,6 +9,12 @@ function App() {
   return (
     <Router>
       <div>
+      <nav>
+          <ul>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/Dashboard">Dashboard</Link></li>
+          </ul>
+        </nav>
         <div className="card">
           <button onClick={() => setCount((count) => count + 1)}>
             count is {count}
@@ -24,7 +30,7 @@ function App() {
         {/* Routes for navigation */}
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/dashboard" element={<dashboard />} /> {/* Corrected the component name */}
+          <Route path="/Dashboard" element={<Dashboard />} /> {/* Corrected the component name */}
         </Routes>
       </div>
     </Router>

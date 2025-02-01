@@ -1,11 +1,11 @@
-import React from 'react'
+import React from 'react';
 
-const dashboard = (() => {
+const Dashboard = () => {
   return (
-    <div>dashboard</div>
-  )
-})
+    <div>
+      <h1>Dashboard Page sdfjibasvbdfv</h1>
+    </div>
+  );
+};
 
-dashboard.propTypes = {}
-
-export default dashboard;
+export default Dashboard;
