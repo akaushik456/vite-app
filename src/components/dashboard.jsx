@@ -40,15 +40,16 @@ const App = () => {
         <Sider style={siderStyle}>
           <div className="demo-logo-vertical" />
           <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-            <Menu.Item key="1" icon={<UserOutlined />}>
+          <Menu.Item key="1" icon={<AppstoreOutlined />}>
+              <Link to="/login">Login</Link>
+            </Menu.Item>
+            <Menu.Item key="3" icon={<UserOutlined />}>
               <Link to="/">Home</Link>
             </Menu.Item>
             <Menu.Item key="2" icon={<AppstoreOutlined />}>
               <Link to="/nav1">Nav1</Link>
             </Menu.Item>
-            <Menu.Item key="3" icon={<AppstoreOutlined />}>
-              <Link to="/login">Login</Link>
-            </Menu.Item>
+      
           </Menu>
         </Sider>
 

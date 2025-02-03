@@ -57,6 +57,3 @@ button:focus-visible {
 .ant-menu-dark .ant-menu-item-selected a{
   font-size: 16px !important;
 }
-.ant-layout.ant-layout-has-sider{
-  height: 100vh !important;
-}

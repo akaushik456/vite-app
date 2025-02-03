@@ -1,6 +1,4 @@
-.ant-layout.ant-layout-has-sider >.ant-layout{
-    min-height: 100vh;
-}
+
 
 .ant-layout-header{
     background: rgb(0 9 76) !important;
@@ -11,4 +9,5 @@
 }
 .ant-layout.ant-layout-has-sider{
     padding-top: 40px;
+    height: 100vh;
 }
