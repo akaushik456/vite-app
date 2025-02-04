@@ -8,29 +8,8 @@ const { Title, Text } = Typography;
 const Login = () => {
   const navigate = useNavigate();
 
-  const onFinish = async (values) => {
-    console.log("Received values:", values);
-
-    // Simulate API Call (Replace with actual API call)
-    const response = await fetch("https://your-api.com/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username: values.username,
-        password: values.password,
-      }),
-    });
-
-    const data = await response.json();
-
-    if (data.token) {
-      localStorage.setItem("token", data.token); // Save token
-      navigate("/dashboard"); // Redirect to Dashboard
-    } else {
-      alert("Invalid username or password");
-    }
+  const onFinish = () => {
+    navigate("/dashboard"); // Redirect to Dashboard
   };
 
   return (
@@ -65,9 +44,14 @@ const Login = () => {
           <a style={{ float: "right" }} href="#">Forgot password?</a>
         </Form.Item>
 
-        {/* Submit Button */}
+        {/* Submit Button with Link */}
         <Form.Item>
-          <Button type="primary" htmlType="submit" block>
+          <Button
+            type="primary"
+            htmlType="submit"
+            block
+            onClick={() => navigate("/dashboard")} // Manually handle the redirect
+          >
             Log in
           </Button>
         </Form.Item>

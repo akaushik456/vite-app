@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   DesktopOutlined,
@@ -43,17 +43,16 @@ const Dashboard = () => {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      navigate("/"); // Redirect to login if no token
-    }
-  }, [navigate]);
-
   const handleLogout = () => {
-    localStorage.removeItem("token"); // Remove token
-    navigate("/"); // Redirect to login
+    localStorage.removeItem("token"); // Logout action
+    navigate("/"); // Redirect to login page
   };
+
+  // Breadcrumb items
+  const breadcrumbItems = [
+    { title: "User" },
+    { title: "Dashboard" },
+  ];
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
@@ -62,22 +61,28 @@ const Dashboard = () => {
         <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline" items={items} />
       </Sider>
       <Layout>
-        <Header style={{ padding: 0, background: colorBgContainer, display: "flex", justifyContent: "space-between", alignItems: "center", paddingRight: "16px" }}>
+        <Header
+          style={{
+            padding: 0,
+            background: colorBgContainer,
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            paddingRight: "16px",
+          }}
+        >
           <span style={{ marginLeft: "16px", fontSize: "18px", fontWeight: "bold" }}>Dashboard</span>
-          <button
-        onClick={() => {
-          localStorage.removeItem("token"); // Logout
-          navigate("/");
-        }}
-      >
-        Logout
-      </button>
+          <Button
+            type="primary"
+            icon={<LogoutOutlined />}
+            onClick={handleLogout}
+            style={{ marginRight: "16px" }}
+          >
+            Logout
+          </Button>
         </Header>
         <Content style={{ margin: "0 16px" }}>
-          <Breadcrumb style={{ margin: "16px 0" }}>
-            <Breadcrumb.Item>User</Breadcrumb.Item>
-            <Breadcrumb.Item>Dashboard</Breadcrumb.Item>
-          </Breadcrumb>
+          <Breadcrumb style={{ margin: "16px 0" }} items={breadcrumbItems} />
           <div
             style={{
               padding: 24,
