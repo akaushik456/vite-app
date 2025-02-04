@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Nav1 from './nav1';
 import Login from './login'
+import Aman from './aman'
 import './dashboard.css'
 
 import {
@@ -49,6 +50,9 @@ const App = () => {
             <Menu.Item key="2" icon={<AppstoreOutlined />}>
               <Link to="/nav1">Nav1</Link>
             </Menu.Item>
+            <Menu.Item key="4" icon={<AppstoreOutlined />}>
+              <Link to="/aman">aman</Link>
+            </Menu.Item>
       
           </Menu>
         </Sider>
@@ -69,6 +73,7 @@ const App = () => {
                 <Route path="/" element={<h1>Home Page</h1>} />
                 <Route path="/nav1" element={<Nav1 />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/aman" element={<Aman />} />
               </Routes>
             </div>
           </Content>
