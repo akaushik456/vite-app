@@ -1,62 +1,77 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Button, Checkbox, Form, Input, Card, Typography } from 'antd';
-import './login.css';
+import React from "react";
+import { Button, Checkbox, Form, Input, Typography } from "antd";
+import { LockOutlined, UserOutlined } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
 
-const { Title } = Typography;
+const { Title, Text } = Typography;
 
 const Login = () => {
-  const navigate = useNavigate(); // Hook for navigation
+  const navigate = useNavigate();
 
-  const onFinish = (values) => {
-    console.log('Success:', values);
-    navigate('/nav1'); // Redirect to Nav1 page on successful login
-  };
+  const onFinish = async (values) => {
+    console.log("Received values:", values);
 
-  const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
+    // Simulate API Call (Replace with actual API call)
+    const response = await fetch("https://your-api.com/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: values.username,
+        password: values.password,
+      }),
+    });
+
+    const data = await response.json();
+
+    if (data.token) {
+      localStorage.setItem("token", data.token); // Save token
+      navigate("/dashboard"); // Redirect to Dashboard
+    } else {
+      alert("Invalid username or password");
+    }
   };
 
   return (
-    <div className="login-container">
-      <Card className="login-card">
-        <Title level={2} className="login-title">Login</Title>
-
-        <Form
-          name="basic"
-          layout="vertical"
-          initialValues={{ remember: true }}
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
-          autoComplete="off"
+    <div style={{ maxWidth: "400px", margin: "auto", padding: "20px" }}>
+      <Title level={2}>Sign In</Title>
+      <Text>Enter your username and password</Text>
+      <Form
+        name="login"
+        initialValues={{ remember: true }}
+        onFinish={onFinish}
+        layout="vertical"
+      >
+        {/* Username Field */}
+        <Form.Item
+          name="username"
+          rules={[{ required: true, message: "Please enter your username!" }]}
         >
-          <Form.Item
-            label="Username"
-            name="username"
-            rules={[{ required: true, message: 'Please input your username!' }]}
-          >
-            <Input placeholder="Enter your username" />
-          </Form.Item>
+          <Input prefix={<UserOutlined />} placeholder="Username" />
+        </Form.Item>
 
-          <Form.Item
-            label="Password"
-            name="password"
-            rules={[{ required: true, message: 'Please input your password!' }]}
-          >
-            <Input.Password placeholder="Enter your password" />
-          </Form.Item>
+        {/* Password Field */}
+        <Form.Item
+          name="password"
+          rules={[{ required: true, message: "Please enter your password!" }]}
+        >
+          <Input.Password prefix={<LockOutlined />} placeholder="Password" />
+        </Form.Item>
 
-          <Form.Item name="remember" valuePropName="checked">
-            <Checkbox>Remember me</Checkbox>
-          </Form.Item>
+        {/* Remember Me & Forgot Password */}
+        <Form.Item>
+          <Checkbox>Remember me</Checkbox>
+          <a style={{ float: "right" }} href="#">Forgot password?</a>
+        </Form.Item>
 
-          <Form.Item>
-            <Button type="primary" htmlType="submit" block>
-              Submit
-            </Button>
-          </Form.Item>
-        </Form>
-      </Card>
+        {/* Submit Button */}
+        <Form.Item>
+          <Button type="primary" htmlType="submit" block>
+            Log in
+          </Button>
+        </Form.Item>
+      </Form>
     </div>
   );
 };
